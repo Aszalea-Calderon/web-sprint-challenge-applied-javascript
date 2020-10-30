@@ -96,7 +96,7 @@ function cardMaker({ headline, authorPhoto, authorName }) {
   imgContainerDiv.src = authorPhoto;
   authNameSpan.textContent = `By ${authorName}`;
 
-  return entryPoint.append(divCard); //This might not be needed as we are appending it in our axios loops
+  return divCard; //This might not be needed as we are appending it in our axios loops
 }
 // const cm = cardMaker("");
 // console.log(cm);
