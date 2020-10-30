@@ -17,16 +17,19 @@
 //   </div>
 // </div>
 //
-// TODO--Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
+// Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
-const entryPoint = document.querySelector(".cards-container");
 
+//
+const entryPoint = document.querySelector(".cards-container");
+//TODO-- Change the format to include event listenters, so when you click the header it takes you to those articles
+//Adding buttons to the trending topics so we can attach them here each time the event listenter runs through.
+
+// const grabTheData = (e) => {
 axios
   .get("https://lambda-times-api.herokuapp.com/articles")
   .then((res) => {
-    //Loop through each type of data and append it using our card maker
-
     //JavaScript Appending-
     const javaArray = res.data.articles.javascript;
     javaArray.forEach((post) => {
@@ -66,9 +69,10 @@ axios
     // cardMaker(populate);
     // console.log(articleInfo, "Good things");
   })
-  .catch((drama) => {
-    console.log("something is wrong with the data", drama);
+  .catch((daBadStuff) => {
+    console.log("something is wrong with the data", daBadStuff);
   });
+// };
 
 function cardMaker({ headline, authorPhoto, authorName }) {
   const divCard = document.createElement("div");
@@ -96,7 +100,7 @@ function cardMaker({ headline, authorPhoto, authorName }) {
   imgContainerDiv.src = authorPhoto;
   authNameSpan.textContent = `By ${authorName}`;
 
-  return divCard; //This might not be needed as we are appending it in our axios loops
+  return divCard;
 }
 // const cm = cardMaker("");
 // console.log(cm);
