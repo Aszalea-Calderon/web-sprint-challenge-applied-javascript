@@ -10,33 +10,19 @@
 //
 // NOTE: you do _not_ need to install axios as it's included in the HTML via script element
 
+const spanTrending = document.querySelector(".topics");
+
 axios
   .get(" https://lambda-times-api.herokuapp.com/topics")
   .then((res) => {
-    const images = res.topics;
-    images.forEach((topics) => {
-      const newTab = tabMaker(topics);
-      newTab.append(tabMaker);
+    res.data.topics.forEach((post) => {
+      const divTopic = document.createElement("div");
+      divTopic.classList.add("tab");
+      divTopic.textContent = post;
+      spanTrending.append(divTopic);
+      console.log(res, "Good Stuff Happened");
     });
-
-    console.log(res, "Good Stuff Happened");
   })
   .catch((drama) => {
     console.log("Something is wrong with the data", drama);
   });
-
-function tabMaker(post) {
-  const spanTrending = document.querySelector("span");
-  const divTopic = document.createElement("div");
-
-  //Appending
-  spanTrending.append(divTopic);
-
-  //Classes
-  divTopic.classList.add("tab");
-
-  //Giving it the goods
-  divTopic.textContent = post.topics;
-
-  return spanTrending;
-}
