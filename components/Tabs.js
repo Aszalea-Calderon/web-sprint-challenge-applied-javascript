@@ -13,7 +13,7 @@
 const spanTrending = document.querySelector(".topics");
 
 axios
-  .get(" https://lambda-times-api.herokuapp.com/topics")
+  .get("https://lambda-times-api.herokuapp.com/topics")
   .then((res) => {
     res.data.topics.forEach((post) => {
       const divTopic = document.createElement("div");

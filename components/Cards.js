@@ -25,7 +25,7 @@
 const entryPoint = document.querySelector(".cards-container");
 //TODO-- Change the format to include event listenters, so when you click the header it takes you to those articles
 //Adding buttons to the trending topics so we can attach them here each time the event listenter runs through.
-
+//filter to remove the higher level
 // const grabTheData = (e) => {
 axios
   .get("https://lambda-times-api.herokuapp.com/articles")
@@ -97,7 +97,7 @@ function cardMaker({ headline, authorPhoto, authorName }) {
 
   //textContent--
   headlineDiv.textContent = headline;
-  imgContainerDiv.src = authorPhoto;
+  imgSrc.src = authorPhoto; //change how its structured
   authNameSpan.textContent = `By ${authorName}`;
 
   return divCard;
