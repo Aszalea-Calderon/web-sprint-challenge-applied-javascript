@@ -12,16 +12,31 @@
 
 axios
   .get(" https://lambda-times-api.herokuapp.com/topics")
-  .then((futureData) => {
-    console.log(futureData);
+  .then((res) => {
+    const images = res.topics;
+    images.forEach((topics) => {
+      const newTab = tabMaker(topics);
+      newTab.append(tabMaker);
+    });
+
+    console.log(res, "Good Stuff Happened");
   })
   .catch((drama) => {
-    console.log("Something is wrong with the data");
+    console.log("Something is wrong with the data", drama);
   });
 
-// function tabMaker(){
-//   const divTopic = document.createElement("div");
+function tabMaker(post) {
+  const spanTrending = document.querySelector("span");
+  const divTopic = document.createElement("div");
 
-//   //a
+  //Appending
+  spanTrending.append(divTopic);
 
-// }
+  //Classes
+  divTopic.classList.add("tab");
+
+  //Giving it the goods
+  divTopic.textContent = post.topics;
+
+  return spanTrending;
+}
