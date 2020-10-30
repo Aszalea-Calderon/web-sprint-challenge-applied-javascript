@@ -20,7 +20,7 @@ axios
       divTopic.classList.add("tab");
       divTopic.textContent = post;
       spanTrending.append(divTopic);
-      console.log(res, "Good Stuff Happened");
+      // console.log(res, "Good Stuff Happened");
     });
   })
   .catch((drama) => {
