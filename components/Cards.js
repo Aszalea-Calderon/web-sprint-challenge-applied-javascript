@@ -32,6 +32,7 @@ axios
   .then((res) => {
     //JavaScript Appending-
     const javaArray = res.data.articles.javascript;
+    
     javaArray.forEach((post) => {
       const newCard = cardMaker(post);
       entryPoint.append(newCard);
@@ -39,6 +40,7 @@ axios
 
     //Bootstrap Appending
     const bootArray = res.data.articles.bootstrap;
+    
     bootArray.forEach((post) => {
       const newCard = cardMaker(post);
       entryPoint.append(newCard);
