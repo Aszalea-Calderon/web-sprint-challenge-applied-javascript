@@ -22,74 +22,119 @@
 // Use your function to create a card for each of the articles, and append each card to the DOM.
 const entryPoint = document.querySelector(".cards-container");
 axios
-  .get(" https://lambda-times-api.herokuapp.com/articles")
-  .then((res) => {
-    //JavaScript Appending-
-    const javaArray = res.data.articles.javascript;
+	.get(" https://lambda-times-api.herokuapp.com/articles")
+	.then((res) => {
+		//JavaScript Appending-
+		const javaArray = res.data.articles.javascript;
 
-    javaArray.forEach((post) => {
-      const newCard = cardMaker(post);
-      entryPoint.append(newCard);
-    });
+		// How I would do it
+		const articles2 = res.data.articles;
+		let { articles } = res.data;
+		// articles = "Now I'm a string"
+		// console.log({ articles });
+		// console.log({ res })
+		// console.log({ articles2 }); // make a new object {} -> { "articles2": articles2 }
 
-    //Bootstrap Appending
-    const bootArray = res.data.articles.bootstrap;
+		// console.log("articles ", articles);
+		// console.log(Object.entries(articles));
+		// for (const [topic, articlesByTopic] of Object.entries(articles)) {
+		// 	// for (const entry of Object.entries(articles)) {
+		// 	// console.log(entry);
+		// 	// const key = entry[0];
+		// 	// const articlesByTopic = entry[1];
+		// 	articlesByTopic.forEach((post) => {
+		// 		const newCard = cardMaker(post);
+		// 		entryPoint.append(newCard);
+		// 	})
+		// }
+		for (const item in articles) {
+			// console.log(item);
+			// console.log(articles);
+			console.log(articles[item]);
+			articles[item].forEach(post => {
+				entryPoint.appendChild(cardMaker(post));
+			})
+		}
 
-    bootArray.forEach((post) => {
-      const newCard = cardMaker(post);
-      entryPoint.append(newCard);
-    });
+		// const chaz = {
+		// 	name: "Chaz Kiker",
+		// 	age: 19
+		// }
+		// console.log(Object.entries(chaz));
 
-    //Technology Appending
-    const techArray = res.data.articles.technology;
-    techArray.forEach((post) => {
-      const newCard = cardMaker(post);
-      entryPoint.append(newCard);
-    });
+		// 	const { javascript, bootstrap, technology, jquery, node } = articles;
 
-    //Jquery Appending
-    const jQArray = res.data.articles.jquery;
-    jQArray.forEach((post) => {
-      const newCard = cardMaker(post);
-      entryPoint.append(newCard);
-    });
+		// 	javascript.forEach((post) => {
+		// 		const newCard = cardMaker(post);
+		// 		entryPoint.append(newCard);
+		// 	});
 
-    //Node Appending
-    const nodeArray = res.data.articles.node;
-    nodeArray.forEach((post) => {
-      const newCard = cardMaker(post);
-      entryPoint.append(newCard);
-    });
-  })
-  .catch((theBadStuff) => {
-    console.log(theBadStuff, "theBadStuff");
-  });
+		// 	//Bootstrap Appending
+		// 	// const bootArray = res.data.articles.bootstrap;
+
+		// 	bootstrap.forEach((post) => {
+		// 		const newCard = cardMaker(post);
+		// 		entryPoint.append(newCard);
+		// 	});
+
+		// 	//Technology Appending
+		// 	// const techArray = res.data.articles.technology;
+		// 	technology.forEach((post) => {
+		// 		const newCard = cardMaker(post);
+		// 		entryPoint.append(newCard);
+		// 	});
+
+		// 	//Jquery Appending
+		// 	// const jQArray = res.data.articles.jquery;
+		// 	jquery.forEach((post) => {
+		// 		const newCard = cardMaker(post);
+		// 		entryPoint.append(newCard);
+		// 	});
+
+		// 	//Node Appending
+		// 	// const nodeArray = res.data.articles.node;
+		// 	node.forEach((post) => {
+		// 		const newCard = cardMaker(post);
+		// 		entryPoint.append(newCard);
+		// 	});
+		// })
+		// .catch((theBadStuff) => {
+		// 	console.log(theBadStuff, "theBadStuff");
+
+		// 	// FYI, you can use a special error logger
+		// 	console.error(theBadStuff);
+	});
+
+	
 
 function cardMaker({ headline, authorPhoto, authorName }) {
-  const divCard = document.createElement("div");
-  const headlineDiv = document.createElement("div");
-  const authorDiv = document.createElement("div");
-  const imgContainerDiv = document.createElement("div");
-  const imgSrc = document.createElement("img");
-  const authNameSpan = document.createElement("span");
+	const divCard = document.createElement("div");
+	const headlineDiv = document.createElement("div");
+	const authorDiv = document.createElement("div");
+	const imgContainerDiv = document.createElement("div");
+	const imgSrc = document.createElement("img");
+	const authNameSpan = document.createElement("span");
 
-  //classes
-  divCard.classList.add("card");
-  headlineDiv.classList.add("headline");
-  authorDiv.classList.add("author");
-  imgContainerDiv.classList.add("img-container");
+	//classes
+	divCard.classList.add("card");
+	headlineDiv.classList.add("headline");
+	authorDiv.classList.add("author");
+	imgContainerDiv.classList.add("img-container");
 
-  //Appending
-  divCard.append(headlineDiv);
-  divCard.append(authorDiv);
-  authorDiv.append(imgContainerDiv);
-  imgContainerDiv.append(imgSrc);
-  authorDiv.append(authNameSpan);
+	//Appending
+	// divCard.append(headlineDiv);
+	// divCard.append(authorDiv);
+	divCard.append(headlineDiv, authorDiv);
+	// authorDiv.append(imgContainerDiv);
+	// authorDiv.append(authNameSpan);
+	authorDiv.append(imgContainerDiv, authNameSpan);
+	imgContainerDiv.append(imgSrc);
 
-  //textContent--
-  headlineDiv.textContent = headline;
-  imgSrc.src = authorPhoto; //change how its structured
-  authNameSpan.textContent = `By ${authorName}`;
+	//textContent--
+	headlineDiv.textContent = headline;
+	// imgSrc.src = authorPhoto; //change how its structured
+	imgSrc.setAttribute("src", authorPhoto);
+	authNameSpan.textContent = `By ${authorName}`;
 
-  return divCard;
+	return divCard;
 }
