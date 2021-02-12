@@ -21,6 +21,10 @@ function Header() {
   lambdaTimesH1.innerHTML = "Lambda Times";
   tempSpan.innerHTML = "98°";
 
+  //textContents is all text contained by an element and all its children that are for formatting purposes only.
+  //innerText returns all text contained by an element and all its child elements.
+  //innerHtml returns all text, including html tags, that is contained by an element.
+
   return headerDiv;
 }
 const head = Header("");
